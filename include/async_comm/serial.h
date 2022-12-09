@@ -40,6 +40,7 @@
 
 #include <string>
 
+#include <utility>
 #include <boost/asio.hpp>
 #include <boost/function.hpp>
 

@@ -45,6 +45,7 @@
 #include <list>
 #include <mutex>
 #include <thread>
+#include <utility>
 
 #include <boost/asio.hpp>
 #include <boost/function.hpp>

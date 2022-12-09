@@ -64,7 +64,7 @@ bool Serial::set_baud_rate(unsigned int baud_rate)
   {
     serial_port_.set_option(serial_port_base::baud_rate(baud_rate_));
   }
-  catch (boost::system::system_error e)
+  catch (boost::system::system_error &e)
   {
     message_handler_.error(e.what());
     return false;
@@ -89,7 +89,7 @@ bool Serial::do_init()
     serial_port_.set_option(serial_port_base::stop_bits(serial_port_base::stop_bits::one));
     serial_port_.set_option(serial_port_base::flow_control(serial_port_base::flow_control::none));
   }
-  catch (boost::system::system_error e)
+  catch (boost::system::system_error &e)
   {
     message_handler_.error(e.what());
     return false;

@@ -10,9 +10,9 @@ find_package(Threads)
 
 add_library(${PROJECT_NAME} SHARED
   src/comm.cpp
-  src/udp.cpp
+#  src/udp.cpp
   src/serial.cpp
-  src/tcp_client.cpp
+#  src/tcp_client.cpp
 )
 target_include_directories(${PROJECT_NAME} PRIVATE ${Boost_INCLUDE_DIRS})
 target_include_directories(${PROJECT_NAME} PUBLIC
