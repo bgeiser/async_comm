@@ -44,14 +44,14 @@ install(TARGETS ${PROJECT_NAME}
   ARCHIVE DESTINATION lib
   LIBRARY DESTINATION lib
 )
-install(DIRECTORY include/${PROJECT_NAME}
-  DESTINATION include
-  FILES_MATCHING PATTERN "*.h"
-)
+#install(DIRECTORY include/${PROJECT_NAME}
+#  DESTINATION include
+#  FILES_MATCHING PATTERN "*.h"
+#)
 
 # install CMake package configuration
-install(EXPORT ${PROJECT_NAME}-targets DESTINATION lib/${PROJECT_NAME})
-install(FILES ${PROJECT_NAME}-config.cmake DESTINATION lib/${PROJECT_NAME})
+#install(EXPORT ${PROJECT_NAME}-targets DESTINATION lib/${PROJECT_NAME})
+#install(FILES ${PROJECT_NAME}-config.cmake DESTINATION lib/${PROJECT_NAME})
 
 # install package.xml for ROS release
-install(FILES package.xml DESTINATION share/${PROJECT_NAME})
+#install(FILES package.xml DESTINATION share/${PROJECT_NAME})
