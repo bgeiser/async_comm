@@ -83,7 +83,7 @@ void Comm::close()
   io_service_.stop();
   do_close();
 
-  if (io_thread_.joinable())
+  if (io_thread_.joinable() && std::this_thread::get_id() != io_thread_.get_id())
   {
     io_thread_.join();
   }
