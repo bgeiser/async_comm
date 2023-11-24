@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.0.2)
+cmake_minimum_required(VERSION 3.5)
 project(async_comm)
 
 if (NOT DEFINED CMAKE_BUILD_TYPE)
