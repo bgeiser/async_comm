@@ -79,9 +79,9 @@ private:
   bool is_open() override;
   bool do_init() override;
   void do_close() override;
-  void do_async_read(const boost::asio::mutable_buffers_1 &buffer,
+  void do_async_read(const boost::asio::mutable_buffer &buffer,
                      boost::function<void(const boost::system::error_code&, size_t)> handler) override;
-  void do_async_write(const boost::asio::const_buffers_1 &buffer,
+  void do_async_write(const boost::asio::const_buffer &buffer,
                       boost::function<void(const boost::system::error_code&, size_t)> handler) override;
 
   std::string port_;

@@ -47,7 +47,7 @@ DefaultMessageHandler Comm::default_message_handler_;
 
 Comm::Comm(MessageHandler& message_handler) :
   message_handler_(message_handler),
-  io_service_(),
+  io_context_(),
   new_data_(false),
   shutdown_requested_(false),
   write_in_progress_(false)
@@ -66,7 +66,7 @@ bool Comm::init()
   callback_thread_ = std::thread(std::bind(&Comm::process_callbacks, this));
 
   async_read();
-  io_thread_ = std::thread(boost::bind(&boost::asio::io_service::run, &this->io_service_));
+  io_thread_ = std::thread(boost::bind(&boost::asio::io_context::run, &this->io_context_));
 
   return true;
 }
@@ -80,7 +80,7 @@ void Comm::close()
   }
   condition_variable_.notify_one();
 
-  io_service_.stop();
+  io_context_.stop();
   do_close();
 
   if (io_thread_.joinable() && std::this_thread::get_id() != io_thread_.get_id())

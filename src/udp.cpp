@@ -52,7 +52,7 @@ UDP::UDP(std::string bind_host, uint16_t bind_port, std::string remote_host, uin
   bind_port_(bind_port),
   remote_host_(remote_host),
   remote_port_(remote_port),
-  socket_(io_service_)
+  socket_(io_context_)
 {
 }
 
@@ -70,7 +70,7 @@ bool UDP::do_init()
 {
   try
   {
-    udp::resolver resolver(io_service_);
+    udp::resolver resolver(io_context_);
 
     bind_endpoint_ = *resolver.resolve({udp::v4(), bind_host_, "",
                                         boost::asio::ip::resolver_query_base::numeric_service});
@@ -101,13 +101,13 @@ void UDP::do_close()
   socket_.close();
 }
 
-void UDP::do_async_read(const boost::asio::mutable_buffers_1 &buffer,
+void UDP::do_async_read(const boost::asio::mutable_buffer &buffer,
                         boost::function<void(const boost::system::error_code&, size_t)> handler)
 {
   socket_.async_receive_from(buffer, remote_endpoint_, handler);
 }
 
-void UDP::do_async_write(const boost::asio::const_buffers_1 &buffer,
+void UDP::do_async_write(const boost::asio::const_buffer &buffer,
                          boost::function<void(const boost::system::error_code&, size_t)> handler)
 {
   socket_.async_send_to(buffer, remote_endpoint_, handler);

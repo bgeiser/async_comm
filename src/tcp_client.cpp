@@ -48,7 +48,7 @@ TCPClient::TCPClient(std::string host, uint16_t port, MessageHandler& message_ha
   Comm(message_handler),
   host_(host),
   port_(port),
-  socket_(io_service_)
+  socket_(io_context_)
 {
 }
 
@@ -66,7 +66,7 @@ bool TCPClient::do_init()
 {
   try
   {
-    tcp::resolver resolver(io_service_);
+    tcp::resolver resolver(io_context_);
 
     endpoint_ = *resolver.resolve({tcp::v4(), host_, "", boost::asio::ip::resolver_query_base::numeric_service});
     endpoint_.port(port_);
@@ -92,13 +92,13 @@ void TCPClient::do_close()
   socket_.close();
 }
 
-void TCPClient::do_async_read(const boost::asio::mutable_buffers_1 &buffer,
+void TCPClient::do_async_read(const boost::asio::mutable_buffer &buffer,
                         boost::function<void(const boost::system::error_code&, size_t)> handler)
 {
   socket_.async_receive(buffer, handler);
 }
 
-void TCPClient::do_async_write(const boost::asio::const_buffers_1 &buffer,
+void TCPClient::do_async_write(const boost::asio::const_buffer &buffer,
                          boost::function<void(const boost::system::error_code&, size_t)> handler)
 {
   socket_.async_send(buffer, handler);
