@@ -5,7 +5,7 @@ if (NOT DEFINED CMAKE_BUILD_TYPE)
   set(CMAKE_BUILD_TYPE Release)
 endif (NOT DEFINED CMAKE_BUILD_TYPE)
 
-find_package(Boost REQUIRED COMPONENTS system)
+find_package(Boost REQUIRED OPTIONAL_COMPONENTS system)
 find_package(Threads)
 
 add_library(${PROJECT_NAME} SHARED
